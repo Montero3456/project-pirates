@@ -11,10 +11,10 @@ const files = [
     {
         name: "Example Application",
         description: "Example application download.",
-        type: "EXE",
-        size: "120 MB",
-        thumbnail: "https://placehold.co/600x400/15191e/ffb52e?text=Application",
-        downloadUrl: "https://example.com/application.exe"
+        type: "MP4",
+        size: "354 MB",
+        thumbnail: "https://media.themoviedb.org/t/p/w533_and_h300_face/5nhp41gx49vXjwXuDXJwQrRFsng.jpg",
+        downloadUrl: "https://github.com/Montero3456/project-pirates/releases/download/Elf/Elf.2003.mp4"
     }
 ];
 
