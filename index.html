@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Pirates</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b0d10;
+            color: #fff;
+        }
+
+        header {
+            background: linear-gradient(135deg, #11151a, #191f27);
+            border-bottom: 1px solid #303740;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 42px;
+            color: #ffb52e;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: #aeb6c0;
+            margin: 10px 0 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #343c46;
+            border-radius: 10px;
+            background: #15191e;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: #ffb52e;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+        }
+
+        .file-card {
+            background: #15191e;
+            border: 1px solid #2c333b;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.2s ease;
+        }
+
+        .file-card:hover {
+            transform: translateY(-4px);
+            border-color: #ffb52e;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #0e1115;
+            display: block;
+        }
+
+        .file-info {
+            padding: 18px;
+        }
+
+        .file-name {
+            margin: 0 0 8px;
+            font-size: 21px;
+            color: #fff;
+        }
+
+        .description {
+            color: #aeb6c0;
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 42px;
+        }
+
+        .metadata {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .tag {
+            background: #252c34;
+            color: #cbd2da;
+            border-radius: 6px;
+            padding: 5px 8px;
+            font-size: 12px;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            background: #ffb52e;
+            color: #111;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #ffc65a;
+        }
+
+        .empty {
+            text-align: center;
+            color: #8d969f;
+            padding: 50px;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #69737d;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏴‍☠️ Project Pirates</h1>
+    <p>File archive and download center</p>
+</header>
+
+<div class="container">
+
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Search files..."
+    >
+
+    <div id="fileGrid" class="file-grid"></div>
+
+    <div id="empty" class="empty">
+        No files found.
+    </div>
+
+</div>
+
+<footer>
+    Project Pirates &copy; 2026
+</footer>
+
+<script>
+
+const files = [
+
+    {
+        name: "Example Project",
+        description: "Example downloadable project file.",
+        type: "ZIP",
+        size: "25 MB",
+        thumbnail: "https://placehold.co/600x400/15191e/ffb52e?text=Project",
+        downloadUrl: "https://example.com/example-project.zip"
+    },
+
+    {
+        name: "Example Application",
+        description: "Example application download.",
+        type: "EXE",
+        size: "120 MB",
+        thumbnail: "https://placehold.co/600x400/15191e/ffb52e?text=Application",
+        downloadUrl: "https://example.com/application.exe"
+    }
+
+];
+
+const fileGrid = document.getElementById("fileGrid");
+const empty = document.getElementById("empty");
+const search = document.getElementById("search");
+
+function displayFiles(searchTerm = "") {
+
+    fileGrid.innerHTML = "";
+
+    const filteredFiles = files.filter(file => {
+
+        const text =
+            file.name + " " +
+            file.description + " " +
+            file.type;
+
+        return text.toLowerCase().includes(
+            searchTerm.toLowerCase()
+        );
+    });
+
+    if (filteredFiles.length === 0) {
+        empty.style.display = "block";
+        return;
+    }
+
+    empty.style.display = "none";
+
+    filteredFiles.forEach(file => {
+
+        const card = document.createElement("div");
+
+        card.className = "file-card";
+
+        card.innerHTML = `
+            <img
+                class="thumbnail"
+                src="${file.thumbnail}"
+                alt="${escapeHTML(file.name)}"
+                onerror="this.src='https://placehold.co/600x400/15191e/ffb52e?text=No+Thumbnail'"
+            >
+
+            <div class="file-info">
+
+                <h2 class="file-name">
+                    ${escapeHTML(file.name)}
+                </h2>
+
+                <p class="description">
+                    ${escapeHTML(file.description)}
+                </p>
+
+                <div class="metadata">
+                    <span class="tag">
+                        ${escapeHTML(file.type)}
+                    </span>
+
+                    <span class="tag">
+                        ${escapeHTML(file.size)}
+                    </span>
+                </div>
+
+                <a
+                    class="download-btn"
+                    href="${file.downloadUrl}"
+                    download
+                >
+                    ⬇ Download
+                </a>
+
+            </div>
+        `;
+
+        fileGrid.appendChild(card);
+    });
+}
+
+search.addEventListener("input", function () {
+    displayFiles(this.value);
+});
+
+function escapeHTML(text) {
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+displayFiles();
+
+</script>
+
+</body>
+</html>
