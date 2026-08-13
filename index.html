@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Project Pirates</title>
 
     <style>
         :root {
             --bg: #080a0e;
-            --surface: rgba(20, 24, 31, 0.78);
-            --surface-solid: #14181f;
+            --surface: rgba(20, 24, 31, 0.85);
             --border: rgba(255, 255, 255, 0.08);
             --text: #f5f7fa;
             --muted: #8e98a6;
@@ -27,10 +27,18 @@
 
         body {
             margin: 0;
-            font-family: Inter, Arial, Helvetica, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background:
-                radial-gradient(circle at 20% 0%, rgba(255, 181, 46, 0.08), transparent 30%),
-                radial-gradient(circle at 80% 10%, rgba(85, 100, 255, 0.06), transparent 30%),
+                radial-gradient(
+                    circle at 20% 0%,
+                    rgba(255, 181, 46, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 10%,
+                    rgba(80, 100, 255, 0.06),
+                    transparent 30%
+                ),
                 var(--bg);
             color: var(--text);
             min-height: 100vh;
@@ -38,7 +46,7 @@
 
         header {
             position: relative;
-            padding: 80px 20px 65px;
+            padding: 75px 20px 60px;
             text-align: center;
             overflow: hidden;
             border-bottom: 1px solid var(--border);
@@ -59,24 +67,28 @@
 
         .logo {
             position: relative;
-            font-size: 56px;
+            font-size: 55px;
             margin-bottom: 10px;
         }
 
         header h1 {
             position: relative;
             margin: 0;
-            font-size: clamp(36px, 6vw, 60px);
+            font-size: clamp(38px, 6vw, 60px);
             font-weight: 800;
             letter-spacing: -2px;
-            background: linear-gradient(135deg, #fff, #ffb52e);
+            background: linear-gradient(
+                135deg,
+                #ffffff,
+                #ffb52e
+            );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         header p {
             position: relative;
-            margin: 14px auto 0;
+            margin: 15px auto 0;
             max-width: 600px;
             color: var(--muted);
             font-size: 16px;
@@ -96,31 +108,25 @@
             margin-bottom: 30px;
         }
 
-        .file-count {
-            color: var(--muted);
-            font-size: 14px;
-            white-space: nowrap;
-        }
-
         .search-wrapper {
             position: relative;
             flex: 1;
-            max-width: 500px;
+            max-width: 550px;
         }
 
         .search-icon {
             position: absolute;
-            left: 16px;
+            left: 17px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--muted);
-            font-size: 18px;
+            font-size: 19px;
             pointer-events: none;
         }
 
         .search {
             width: 100%;
-            padding: 15px 18px 15px 46px;
+            padding: 15px 18px 15px 47px;
             border: 1px solid var(--border);
             border-radius: 12px;
             background: var(--surface);
@@ -137,12 +143,20 @@
 
         .search:focus {
             border-color: rgba(255, 181, 46, 0.5);
-            box-shadow: 0 0 0 4px rgba(255, 181, 46, 0.08);
+            box-shadow:
+                0 0 0 4px rgba(255, 181, 46, 0.08);
+        }
+
+        .file-count {
+            color: var(--muted);
+            font-size: 14px;
+            white-space: nowrap;
         }
 
         .file-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            grid-template-columns:
+                repeat(auto-fill, minmax(290px, 1fr));
             gap: 24px;
         }
 
@@ -152,16 +166,19 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             overflow: hidden;
+
             transition:
                 transform 0.25s ease,
                 border-color 0.25s ease,
                 box-shadow 0.25s ease;
+
             animation: fadeIn 0.4s ease both;
         }
 
         .file-card:hover {
             transform: translateY(-6px);
             border-color: rgba(255, 181, 46, 0.35);
+
             box-shadow:
                 0 20px 50px rgba(0, 0, 0, 0.35),
                 0 0 30px rgba(255, 181, 46, 0.04);
@@ -169,8 +186,8 @@
 
         .thumbnail-wrapper {
             position: relative;
-            overflow: hidden;
             height: 190px;
+            overflow: hidden;
             background: #0e1116;
         }
 
@@ -189,11 +206,14 @@
         .thumbnail-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                to bottom,
-                transparent 45%,
-                rgba(8, 10, 14, 0.75)
-            );
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent 45%,
+                    rgba(8, 10, 14, 0.75)
+                );
+
             pointer-events: none;
         }
 
@@ -240,30 +260,42 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+
             width: 100%;
             padding: 13px;
+
             border-radius: 10px;
-            background: linear-gradient(
-                135deg,
-                var(--accent),
-                #f5a51c
-            );
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--accent),
+                    #f5a51c
+                );
+
             color: #111;
             text-decoration: none;
             font-size: 14px;
             font-weight: 800;
+
             transition: 0.2s ease;
-            box-shadow: 0 5px 18px rgba(255, 181, 46, 0.12);
+
+            box-shadow:
+                0 5px 18px rgba(255, 181, 46, 0.12);
         }
 
         .download-btn:hover {
-            background: linear-gradient(
-                135deg,
-                var(--accent-hover),
-                var(--accent)
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--accent-hover),
+                    var(--accent)
+                );
+
             transform: translateY(-1px);
-            box-shadow: 0 8px 25px rgba(255, 181, 46, 0.2);
+
+            box-shadow:
+                0 8px 25px rgba(255, 181, 46, 0.2);
         }
 
         .download-btn:active {
@@ -309,11 +341,11 @@
             }
 
             .logo {
-                font-size: 44px;
+                font-size: 45px;
             }
 
             .top-bar {
-                flex-direction: column-reverse;
+                flex-direction: column;
                 align-items: stretch;
             }
 
@@ -334,188 +366,83 @@
 
 <body>
 
-<header>
-    <div class="logo">🏴‍☠️</div>
-    <h1>Project Pirates</h1>
-    <p>
-        A collection of files, projects, and downloads.
-    </p>
-</header>
+    <header>
 
-<div class="container">
+        <div class="logo">
+            🏴‍☠️
+        </div>
 
-    <div class="top-bar">
+        <h1>
+            Project Pirates
+        </h1>
 
-        <div class="search-wrapper">
-            <span class="search-icon">⌕</span>
+        <p>
+            A collection of files, projects, and downloads.
+        </p>
 
-            <input
-                type="text"
-                id="search"
-                class="search"
-                placeholder="Search files..."
+    </header>
+
+
+    <main class="container">
+
+        <div class="top-bar">
+
+            <div class="search-wrapper">
+
+                <span class="search-icon">
+                    🔎
+                </span>
+
+                <input
+                    type="text"
+                    id="search"
+                    class="search"
+                    placeholder="Search files..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div
+                class="file-count"
+                id="fileCount"
             >
-        </div>
-
-        <div class="file-count" id="fileCount">
-            0 files
-        </div>
-
-    </div>
-
-    <div id="fileGrid" class="file-grid"></div>
-
-    <div id="empty" class="empty">
-        <div class="empty-icon">🔎</div>
-        <div>No files found.</div>
-    </div>
-
-</div>
-
-<footer>
-    Project Pirates &copy; 2026
-</footer>
-
-<script>
-
-const files = [
-
-    {
-        name: "Backrooms (2026)",
-        description: "After a therapist's patient disappears into a dimension beyond reality, she must venture into the unknown to save him.",
-        type: "MKV",
-        size: "1.4 GB",
-        thumbnail: "https://cdn.mos.cms.futurecdn.net/mFTTk8BYNLwnfgWBDhATVo-1200-80.jpg",
-        downloadUrl: "https://github.com/Montero3456/project-pirates/releases/download/Backrooms/Backrooms.mkv"
-    },
-
-    {
-        name: "Example Application",
-        description: "Example application download.",
-        type: "EXE",
-        size: "120 MB",
-        thumbnail: "https://placehold.co/600x400/15191e/ffb52e?text=Application",
-        downloadUrl: "https://example.com/application.exe"
-    }
-
-];
-
-const fileGrid = document.getElementById("fileGrid");
-const empty = document.getElementById("empty");
-const search = document.getElementById("search");
-const fileCount = document.getElementById("fileCount");
-
-function displayFiles(searchTerm = "") {
-
-    fileGrid.innerHTML = "";
-
-    const filteredFiles = files.filter(file => {
-
-        const text =
-            file.name + " " +
-            file.description + " " +
-            file.type;
-
-        return text
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase());
-
-    });
-
-    fileCount.textContent =
-        filteredFiles.length +
-        (filteredFiles.length === 1 ? " file" : " files");
-
-    if (filteredFiles.length === 0) {
-
-        empty.style.display = "block";
-
-        return;
-    }
-
-    empty.style.display = "none";
-
-    filteredFiles.forEach((file, index) => {
-
-        const card = document.createElement("div");
-
-        card.className = "file-card";
-
-        card.style.animationDelay = `${index * 0.05}s`;
-
-        card.innerHTML = `
-
-            <div class="thumbnail-wrapper">
-
-                <img
-                    class="thumbnail"
-                    src="${file.thumbnail}"
-                    alt="${escapeHTML(file.name)}"
-                    onerror="this.src='https://placehold.co/600x400/15191e/ffb52e?text=No+Thumbnail'"
-                >
-
-                <div class="thumbnail-overlay"></div>
-
+                0 files
             </div>
 
-            <div class="file-info">
+        </div>
 
-                <h2 class="file-name">
-                    ${escapeHTML(file.name)}
-                </h2>
 
-                <p class="description">
-                    ${escapeHTML(file.description)}
-                </p>
+        <div
+            id="fileGrid"
+            class="file-grid"
+        ></div>
 
-                <div class="metadata">
 
-                    <span class="tag">
-                        ${escapeHTML(file.type)}
-                    </span>
+        <div
+            id="empty"
+            class="empty"
+        >
 
-                    <span class="tag">
-                        ${escapeHTML(file.size)}
-                    </span>
-
-                </div>
-
-                <a
-                    class="download-btn"
-                    href="${file.downloadUrl}"
-                    download
-                >
-                    ↓ Download
-                </a>
-
+            <div class="empty-icon">
+                🔎
             </div>
-        `;
 
-        fileGrid.appendChild(card);
+            <div>
+                No files found.
+            </div>
 
-    });
-}
+        </div>
 
-search.addEventListener("input", function () {
+    </main>
 
-    displayFiles(this.value);
 
-});
+    <footer>
+        Project Pirates &copy; 2026
+    </footer>
 
-function escapeHTML(text) {
 
-    return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-displayFiles();
-
-</script>
+    <script src="script.js"></script>
 
 </body>
 </html>
