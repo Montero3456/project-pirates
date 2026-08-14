@@ -15,6 +15,24 @@ const files = [
         size: "354 MB",
         thumbnail: "https://media.themoviedb.org/t/p/w533_and_h300_face/5nhp41gx49vXjwXuDXJwQrRFsng.jpg",
         downloadUrl: "https://github.com/Montero3456/project-pirates/releases/download/Elf/Elf.2003.mp4"
+    },
+
+    {
+        name: "Sample Video 01",
+        description: "A sample video file for testing the file browser, search functionality, thumbnails, and download button.",
+        type: "MP4",
+        size: "128 MB",
+        thumbnail: "https://placehold.co/600x400/15191e/ffb52e?text=Sample+Video",
+        downloadUrl: "./files/sample-video-01.mp4"
+    },
+
+    {
+        name: "Sample Archive",
+        description: "A sample downloadable archive for testing different file types in the library.",
+        type: "ZIP",
+        size: "42 MB",
+        thumbnail: "https://placehold.co/600x400/15191e/ffb52e?text=Sample+Archive",
+        downloadUrl: "./files/sample-archive.zip"
     }
 ];
 
@@ -39,7 +57,7 @@ function createCard(file) {
             <div class="thumbnail-wrapper">
                 <img
                     class="thumbnail"
-                    src="${file.thumbnail}"
+                    src="${escapeHTML(file.thumbnail)}"
                     alt="${escapeHTML(file.name)}"
                     onerror="this.src='https://placehold.co/600x400/15191e/ffb52e?text=No+Thumbnail'"
                 >
@@ -69,7 +87,7 @@ function createCard(file) {
 
                 <a
                     class="download-btn"
-                    href="${file.downloadUrl}"
+                    href="${escapeHTML(file.downloadUrl)}"
                     download
                 >
                     ↓ Download
@@ -82,17 +100,14 @@ function createCard(file) {
 }
 
 function displayFiles(searchTerm = "") {
-
     const searchText = searchTerm.toLowerCase().trim();
 
     const filteredFiles = files.filter(file => {
-
         return (
             file.name.toLowerCase().includes(searchText) ||
             file.description.toLowerCase().includes(searchText) ||
             file.type.toLowerCase().includes(searchText)
         );
-
     });
 
     fileGrid.innerHTML = "";
@@ -103,7 +118,9 @@ function displayFiles(searchTerm = "") {
 
     if (fileCount) {
         fileCount.textContent =
-            `${filteredFiles.length} ${filteredFiles.length === 1 ? "file" : "files"}`;
+            `${filteredFiles.length} ${
+                filteredFiles.length === 1 ? "file" : "files"
+            }`;
     }
 
     if (filteredFiles.length === 0) {
