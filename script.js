@@ -18,12 +18,12 @@ const files = [
     },
 
     {
-        name: "Sample Video 01",
-        description: "A sample video file for testing the file browser, search functionality, thumbnails, and download button.",
+        name: "Cars (2006)",
+        description: "On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown town and learns that winning isn't everything in life.",
         type: "MP4",
-        size: "128 MB",
-        thumbnail: "https://placehold.co/600x400/15191e/ffb52e?text=Sample+Video",
-        downloadUrl: "./files/sample-video-01.mp4"
+        size: "616 MB",
+        thumbnail: "https://imgs.search.brave.com/XGGANjgn-GmjGokXl1TNHvIyJqRxqg5PIiK41YGuuqk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvOTM2/ODQ3Mi5qcGc",
+        downloadUrl: "https://github.com/Montero3456/project-pirates/releases/download/Cars/Cars.2006.720p.BrRip.x264.YIFY.mp4"
     },
 
     {
